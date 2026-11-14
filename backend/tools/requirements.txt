@@ -1,0 +1,2 @@
+# Optional capacity-test tooling; not needed by the running application.
+psutil>=5.9,<8

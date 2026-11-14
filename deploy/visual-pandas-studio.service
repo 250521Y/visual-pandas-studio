@@ -1,0 +1,25 @@
+[Unit]
+Description=Visual Pandas Studio API
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/var/www/visual-pandas-studio/backend
+EnvironmentFile=/etc/visual-pandas-studio.env
+ExecStart=/var/www/visual-pandas-studio/backend/.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --workers 1 --proxy-headers --forwarded-allow-ips 127.0.0.1
+Restart=on-failure
+RestartSec=3
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/visual-pandas-studio
+MemoryMax=2G
+TasksMax=256
+TimeoutStopSec=30
+
+[Install]
+WantedBy=multi-user.target
